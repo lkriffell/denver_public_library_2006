@@ -11,7 +11,12 @@ class LibraryTest < Minitest::Test
     assert_instance_of Library, dpl
   end
 
-  #def test_it_has_attributes
-  #end
+  def test_it_has_attributes
+    dpl = Library.new("Denver Public Library")
+
+    assert_equal "Denver Public Library", dpl.name
+    assert_equal [], dpl.books
+    assert_equal [], dpl.authors
+  end
 
 end
