@@ -1,14 +1,16 @@
 class Library
-  attr_reader :name, :books, :authors
+  attr_reader :name, :books, :authors, :checked_out_books
 
   def initialize(name)
     @name = name
     @books = []
     @authors = []
+    @checked_out_books = []
   end
 
   def add_author(author)
     @authors << author
+    add_author_books(author)
   end
 
   def add_author_books(author)
@@ -28,5 +30,14 @@ class Library
     time_frame[:start] = book_years.min
     time_frame[:end] = book_years.max
     time_frame
+  end
+
+  def checkout(book)
+    if !@books.include?(book) || @checked_out_books.include?(book)
+      false
+    else
+      @checked_out_books << book
+      true
+    end
   end
 end
