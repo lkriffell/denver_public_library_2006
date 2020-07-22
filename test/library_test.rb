@@ -106,24 +106,28 @@ class LibraryTest < Minitest::Test
     assert_equal [], dpl.checked_out_books
   end
 
-  # def test_most_popular_book
-  #   dpl = Library.new("Denver Public Library")
-  #   charlotte_bronte = Author.new({first_name: "Charlotte",
-  #                             last_name: "Bronte"})
-  #   jane_eyre = charlotte_bronte.write("Jane Eyre", "October 16, 1847")
-  #   professor = charlotte_bronte.write("The Professor", "1857")
-  #   villette = charlotte_bronte.write("Villette", "1853")
-  #
-  #   harper_lee = Author.new({first_name: "Harper",
-  #                           last_name: "Lee"})
-  #   mockingbird = harper_lee.write("To Kill a Mockingbird", "July 11, 1960")
-  #   dpl.add_author(charlotte_bronte)
-  #   dpl.add_author(harper_lee)
-  #   dpl.checkout(mockingbird)
-  #   dpl.return(mockingbird)
-  #   dpl.checkout(mockingbird)
-  #   dpl.return(mockingbird)
-  #   dpl.checkout(mockingbird)
-  #
-  # end
+  def test_most_popular_book
+    dpl = Library.new("Denver Public Library")
+    charlotte_bronte = Author.new({first_name: "Charlotte",
+                              last_name: "Bronte"})
+    jane_eyre = charlotte_bronte.write("Jane Eyre", "October 16, 1847")
+    professor = charlotte_bronte.write("The Professor", "1857")
+    villette = charlotte_bronte.write("Villette", "1853")
+
+    harper_lee = Author.new({first_name: "Harper",
+                            last_name: "Lee"})
+    mockingbird = harper_lee.write("To Kill a Mockingbird", "July 11, 1960")
+    dpl.add_author(charlotte_bronte)
+    dpl.add_author(harper_lee)
+    dpl.checkout(mockingbird)
+    dpl.return(mockingbird)
+    dpl.checkout(mockingbird)
+    dpl.return(mockingbird)
+    dpl.checkout(mockingbird)
+    dpl.checkout(professor)
+    dpl.return(professor)
+
+    assert_equal 3, mockingbird.times_checked_out
+    assert_equal "To Kill a Mockingbird", dpl.most_popular_book
+  end
 end
