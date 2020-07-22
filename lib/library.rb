@@ -6,4 +6,13 @@ class Library
     @books = []
     @authors = []
   end
+
+  def add_author(author)
+    @authors << author
+  end
+
+  def add_author_books(author)
+    @books << author.books
+    @books = @books.flatten
+  end
 end
