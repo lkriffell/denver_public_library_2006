@@ -40,4 +40,8 @@ class Library
       true
     end
   end
+
+  def return(book)
+    @checked_out_books.delete(book)
+  end
 end
