@@ -1,3 +1,4 @@
+require './lib/book'
 class Library
   attr_reader :name, :books, :authors, :checked_out_books
 
@@ -36,6 +37,7 @@ class Library
     if !@books.include?(book) || @checked_out_books.include?(book)
       false
     else
+      book.add_to_times_checked_out
       @checked_out_books << book
       true
     end
@@ -43,5 +45,13 @@ class Library
 
   def return(book)
     @checked_out_books.delete(book)
+  end
+
+  def most_popular_book
+    checkout_times = Hash.new {|hash, key| hash[key] = []}
+    @books.each do |book|
+      checkout_times[book.title] << book.times_checked_out
+    end
+     checkout_times.invert.max[1]
   end
 end
